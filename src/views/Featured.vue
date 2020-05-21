@@ -1,11 +1,26 @@
 <template>
-    $END$
+  <div class="container">
+    <DogList :dogs="featuredDogs" />
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'Featured'
+import DogList from '../components/DogList'
+
+export default {
+  name: 'Featured',
+  components: {
+    DogList
+  },
+  computed: {
+    featuredDogs () {
+      return this.$store.state.dog.featured
+    }
+  },
+  created () {
+    this.$store.dispatch('dog/LOAD_FEATURE_DOG')
   }
+}
 </script>
 
 <style scoped>

@@ -1,7 +1,7 @@
 <template>
-  <div>ddd
+  <div class="switch-container">
     <label class="switch">
-      <input type="checkbox">
+      <input type="checkbox" :checked="checked">
       <span class="slider round"></span>
     </label>
   </div>
@@ -9,16 +9,25 @@
 
 <script>
 export default {
-  name: 'Switch'
+  name: 'AppSwitch',
+  props: {
+    checked: {
+      type: Boolean
+    }
+  }
 }
 </script>
 
 <style scoped>
+  .switch-container {
+    width: max-content;
+  }
+
   .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 30px;
+    height: 15px;
   }
 
   .switch input {
@@ -34,7 +43,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    border: 1px solid #626262;
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -42,27 +51,24 @@ export default {
   .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
+    height: 9.67px;
+    width: 9.67px;
+    left: 2.5px;
+    bottom: 1.75px;
+    background-color: #626262;
     -webkit-transition: .4s;
     transition: .4s;
   }
 
   input:checked + .slider {
-    background-color: #2196F3;
-  }
-
-  input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    border: 1px solid #ffffff;
   }
 
   input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(13px);
+    -ms-transform: translateX(13px);
+    transform: translateX(13px);
+    background-color: #ffffff;
   }
 
   .slider.round {

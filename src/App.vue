@@ -1,32 +1,47 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <AppHeader />
     <router-view/>
   </div>
 </template>
 
+<script>
+import AppHeader from '@/components/AppHeader'
+
+export default {
+  components: {
+    AppHeader
+  }
+}
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+body {
+  margin: 0;
+  background: #1a191d;
 }
 
-#nav {
-  padding: 30px;
+@font-face {
+  font-family: 'IBM Plex Sans';
+  src: local('IBM Plex Sans'), local('IBM Plex Sans'),
+  url('~@/assets/fonts/IBMPlexSans-Regular.ttf') ;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.container {
+  padding: 60px;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+div {
+  font-family: IBM Plex Sans, serif;
+  font-style: normal;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+.active span{
+  color: #ffffff !important;
 }
 </style>
