@@ -1,7 +1,5 @@
 <template>
-  <div class="container" v-scroll="onScroll">
-    <BreedList />
-
+  <div v-scroll="onScroll">
     <DogList :dogs="dogs" />
 
     <Loader :show="show"/>
@@ -11,15 +9,13 @@
 <script>
 import DogList from '../components/DogList'
 import Loader from '../components/UI/Loader'
-import BreedList from '../components/BreedList'
 import { mapGetters } from 'vuex'
 
 export default {
   name: 'Main',
   components: {
     Loader,
-    DogList,
-    BreedList
+    DogList
   },
   data () {
     return {
@@ -33,7 +29,9 @@ export default {
   },
   async created () {
     await this.loadDogs()
-    await this.$store.dispatch('dog/GET_BREEDS')
+    if (this.$store.state.dog.breeds.length) {
+      await this.$store.dispatch('dog/GET_BREEDS')
+    }
   },
   methods: {
     onScroll (event) {
@@ -57,7 +55,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

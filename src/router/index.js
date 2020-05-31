@@ -13,10 +13,18 @@ const routes = [
   {
     path: '/featured',
     name: 'Featured',
-    component: () => import('../views/Featured.vue')
+    component: () => import('../views/Featured.vue'),
+    meta: {
+      layout: 'auth-layout'
+    }
   },
   {
     path: '/:breed',
+    name: 'Breed',
+    component: () => import('../views/Breed.vue')
+  },
+  {
+    path: '/:breed/:subBreed',
     name: 'Breed',
     component: () => import('../views/Breed.vue')
   }

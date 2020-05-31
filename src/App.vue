@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <AppHeader />
-    <router-view/>
+    <component :is="layout">
+      <router-view/>
+    </component>
   </div>
 </template>
 
 <script>
-import AppHeader from '@/components/AppHeader'
-
 export default {
-  components: {
-    AppHeader
+  computed: {
+    layout () {
+      return this.$route.meta.layout || 'default-layout'
+    }
   }
 }
 </script>
@@ -28,7 +29,15 @@ body {
 }
 
 .container {
-  padding: 60px;
+  padding: 40px 60px 60px 60px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
 }
 
 div {

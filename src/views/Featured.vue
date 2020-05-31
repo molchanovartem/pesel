@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <DogList :dogs="featuredDogs" />
   </div>
 </template>
@@ -22,7 +22,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

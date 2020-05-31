@@ -91,9 +91,13 @@ const actions = {
         commit(SET_RANDOM_DOGS, dogs)
       })
   },
-  [GET_CURRENT_BREED_DOGS]: async ({ commit }, breedName) => {
+  [GET_CURRENT_BREED_DOGS]: async ({ commit }, breedName, subBreedName) => {
+    let breed = breedName
+
+    if (subBreedName) breed = `${breed}/${subBreedName}`
+
     await axiosInstance({
-      url: `breed/${breedName}/images/random/20`
+      url: `breed/${breed}/images/random/20`
     })
       .then(({ data }) => {
         const dogs = data.message.map((item) => {
@@ -108,7 +112,7 @@ const actions = {
   },
   [GET_BREEDS]: async ({ commit }) => {
     await axiosInstance({
-      url: 'breeds/list'
+      url: 'breeds/list/all'
     })
       .then(({ data }) => {
         commit(SET_BREEDS, data.message)
@@ -137,6 +141,16 @@ const getters = {
     } else {
       return state.dogs
     }
+  },
+  breeds: state => {
+    const breedList = {}
+
+    for (const key in state.breeds) {
+      if (breedList[key.charAt(0)] === undefined) breedList[key.charAt(0)] = []
+      breedList[key.charAt(0)].push({ name: key, children: state.breeds[key] })
+    }
+
+    return breedList
   },
   isFeatured: state => dogImg => {
     return state.featured.find(dog => dog.img === dogImg) !== undefined

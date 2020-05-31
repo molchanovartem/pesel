@@ -1,7 +1,5 @@
 <template>
-  <div class="container" v-scroll="onScroll">
-    <BreedList nosort />
-
+  <div v-scroll="onScroll">
     <DogList :dogs="dogs" />
 
     <Loader :show="show"/>
@@ -11,21 +9,19 @@
 <script>
 import DogList from '../components/DogList'
 import Loader from '../components/UI/Loader'
-import BreedList from '../components/BreedList'
 
 export default {
   name: 'Breed',
   components: {
     Loader,
-    DogList,
-    BreedList
+    DogList
   },
   data () {
     return {
       show: true
     }
   },
-  destroyed () {
+  beforeDestroy () {
     this.$store.dispatch('dog/DEFAULT')
   },
   computed: {
@@ -35,7 +31,10 @@ export default {
   },
   async created () {
     await this.loadDogs()
-    await this.$store.dispatch('dog/GET_BREEDS')
+
+    if (this.$store.state.dog.breeds.length) {
+      await this.$store.dispatch('dog/GET_BREEDS')
+    }
   },
   methods: {
     onScroll (event) {
@@ -59,7 +58,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

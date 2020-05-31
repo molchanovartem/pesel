@@ -3,6 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import DefaultLayout from './layouts/DefaultLayout.vue'
+import FeaturedLayout from './layouts/FeaturedLayout.vue'
+
+Vue.component('default-layout', DefaultLayout)
+Vue.component('auth-layout', FeaturedLayout)
+
 Vue.config.productionTip = false
 
 Vue.directive('scroll', {

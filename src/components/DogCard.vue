@@ -1,5 +1,6 @@
 <template>
-  <div class="dog-card"  :style="backgroundImg">
+  <div class="dog-card">
+    <img :src="img" class="image" alt="img">
     <div @click.prevent="toFeature()" class="shape-icon" :class="{'full-heart': isFeatured}">
     </div>
     <div class="breed-name">{{ label }}</div>
@@ -40,6 +41,12 @@ export default {
 </script>
 
 <style scoped>
+  .image {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+  }
 .dog-item:first-child .dog-card {
   width: 100%;
   height: 513px;
@@ -47,6 +54,7 @@ export default {
 }
 
 .dog-card {
+  position: relative;
   display: flex;
   justify-content: space-between;
   background-repeat: no-repeat;
@@ -70,6 +78,7 @@ path {
 }
 
 .shape-icon {
+  position: absolute;
   background: url(../assets/shape-white.svg) no-repeat center center;
   width: max-content;
   height: max-content;
@@ -77,6 +86,8 @@ path {
 }
 
 .breed-name {
+  position: absolute;
+  right: 0;
   font-family: IBM Plex Sans, serif;
   font-style: normal;
   font-weight: 600;
